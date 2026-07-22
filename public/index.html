@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortener</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+<body>
+<main>
+  <h1>URL Shortener</h1>
+  <p class="subtitle">Paste a long link. Get a short one back.</p>
+
+  <div class="card">
+    <form id="shorten-form">
+      <div class="field">
+        <label for="longUrl">Long URL</label>
+        <input type="url" id="longUrl" placeholder="https://example.com/a/very/long/path" required>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label for="customAlias">Custom alias <span style="font-weight:400;color:var(--ink-muted)">(optional)</span></label>
+          <input type="text" id="customAlias" placeholder="my-link">
+        </div>
+        <div class="field">
+          <label for="expiresInDays">Expires in <span style="font-weight:400;color:var(--ink-muted)">(days)</span></label>
+          <input type="number" id="expiresInDays" placeholder="never" min="1">
+        </div>
+      </div>
+
+      <button type="submit" id="submit-btn">Shorten</button>
+      <div class="error" id="error"></div>
+    </form>
+  </div>
+
+  <div class="card result" id="result">
+    <label>Your short link</label>
+    <div class="result-row">
+      <div class="result-link" id="short-link"></div>
+      <button class="copy-btn" id="copy-btn" type="button">Copy</button>
+    </div>
+    <div class="meta">
+      <span id="expiry-meta"></span>
+      <a class="stats-link" id="stats-link" href="#" target="_blank">View stats →</a>
+    </div>
+  </div>
+
+  <footer>Visit repo: <a href="https://github.com/literallyrounak/hoopa" target="_blank">Hoopa.</a></footer>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
