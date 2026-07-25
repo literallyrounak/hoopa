@@ -38,6 +38,9 @@ This one also handles:
    ```
 4. Go to your browser and open `http://localhost:5000`.
 
+## System Architecture
+![Project Screenshot](./public/Hoopa-SysDesign)
+
 ## Project structure
 ```
 public/

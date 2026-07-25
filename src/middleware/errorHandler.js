@@ -1,5 +1,3 @@
-// Catches anything thrown/rejected in routes (works with express-async-errors)
-// and returns a consistent JSON error shape instead of leaking a stack trace.
 function errorHandler(err, req, res, next) {
   console.error(err);
 

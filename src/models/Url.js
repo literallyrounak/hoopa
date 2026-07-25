@@ -12,7 +12,6 @@ const urlSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    // Optional custom alias the user chose instead of a random code
     isCustomAlias: {
       type: Boolean,
       default: false,
@@ -21,13 +20,11 @@ const urlSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
-    // If set, the link stops redirecting after this date
     expiresAt: {
       type: Date,
       default: null,
     },
     createdBy: {
-      // Placeholder for when auth is added later - not enforced yet
       type: String,
       default: null,
     },
@@ -35,7 +32,6 @@ const urlSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// A link is "expired" if expiresAt is set and in the past
 urlSchema.methods.isExpired = function () {
   return Boolean(this.expiresAt) && this.expiresAt.getTime() < Date.now();
 };

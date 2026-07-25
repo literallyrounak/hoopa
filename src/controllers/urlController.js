@@ -4,10 +4,7 @@ const { generateShortCode, isValidUrl, classifyDevice } = require('../utils/urlU
 
 const BASE_URL = process.env.BASE_URL || 'http://localhost:5000';
 
-/**
- * POST /api/urls
- * Body: { longUrl: string, customAlias?: string, expiresInDays?: number }
- */
+
 async function createShortUrl(req, res) {
   const { longUrl, customAlias, expiresInDays } = req.body;
 
@@ -23,11 +20,10 @@ async function createShortUrl(req, res) {
       return res.status(409).json({ error: `Alias "${shortCode}" is already taken.` });
     }
   } else {
-    // Extremely unlikely collision with nanoid, but guard anyway.
     let attempts = 0;
     while (await Url.findOne({ shortCode })) {
       shortCode = generateShortCode();
-      attempts += 1;
+      attempts++;
       if (attempts > 5) {
         return res.status(500).json({ error: 'Could not generate a unique short code, try again.' });
       }
@@ -54,10 +50,7 @@ async function createShortUrl(req, res) {
   });
 }
 
-/**
- * GET /:code
- * Redirects to the long URL and logs a click event (fire-and-forget).
- */
+
 async function redirectToLongUrl(req, res) {
   const { code } = req.params;
 
@@ -71,7 +64,7 @@ async function redirectToLongUrl(req, res) {
     return res.status(410).json({ error: 'This short URL has expired.' });
   }
 
-  // Log the click without making the redirect wait on it.
+
   logClick(url, req).catch((err) => console.error('Failed to log click:', err));
 
   Url.updateOne({ _id: url._id }, { $inc: { clickCount: 1 } }).catch((err) =>
@@ -90,9 +83,6 @@ async function logClick(url, req) {
   });
 }
 
-/**
- * GET /api/urls/:code/stats
- */
 async function getUrlStats(req, res) {
   const { code } = req.params;
 

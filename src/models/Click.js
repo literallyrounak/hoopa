@@ -19,7 +19,6 @@ const clickSchema = new mongoose.Schema({
     type: String,
     default: null,
   },
-  // Coarse device type parsed from the user agent (desktop/mobile/bot/etc.)
   deviceType: {
     type: String,
     default: 'unknown',
